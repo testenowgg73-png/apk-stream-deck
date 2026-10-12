@@ -1,0 +1,48 @@
+ULTRON STREAM DECK — versão inicial
+
+O QUE VEM NO ZIP
+- Windows/ultron_pc.py: aplicativo configurador/servidor para Windows (interface gráfica).
+- Windows/iniciar_ultron.bat: abre o aplicativo no Windows.
+- Android/: projeto-fonte Android compatível com minSdk 17 (Android 4.2.2).
+
+IMPORTANTE SOBRE O CABO USB
+O app não usa USB accessory/serial diretamente. O modo mais simples e compatível é ativar no tablet: Configurações > Mais > Roteador/Tethering > Compartilhamento USB, com o cabo conectado ao PC. Isso cria uma rede USB. No programa Windows, veja “IPs do PC” e digite no campo IP do tablet o endereço da interface USB (geralmente 192.168.42.x ou 192.168.137.x; use o que aparecer no Windows). Se não aparecer, execute ipconfig no PC.
+
+INSTALAÇÃO NO WINDOWS
+1. Instale Python 3 para Windows (marque “Add Python to PATH”). O programa usa somente bibliotecas padrão.
+2. Extraia a pasta ULTRON_StreamDeck.
+3. Dê dois cliques em Windows/iniciar_ultron.bat.
+4. Clique em “Iniciar servidor”. Se o Firewall do Windows perguntar, permita em rede privada.
+5. Mude o token padrão para outro com pelo menos 8 caracteres e salve. Use o mesmo token no tablet.
+
+ANDROID / APK
+O projeto Android está em Android/. Este ambiente não tem Android SDK nem Gradle instalados, então não foi possível compilar/verificar um APK pronto aqui. Para compilar, abra a pasta Android no Android Studio compatível, instale Android SDK Platform 33 e Gradle plugin 7.4.2, sincronize e use Build > Build APK(s). Para Android 4.2.2, minSdk é 17; o APK gerado pode ser instalado manualmente. Não instale um APK de origem desconhecida.
+
+COMO CONFIGURAR AÇÕES
+Na janela do Windows, altere nome, tipo e valor de cada botão e clique em “Salvar configurações”. Tipos:
+- media: play_pause, next, previous, stop
+- volume: up, down, mute
+- shortcut: combinações como ctrl+shift+esc, alt+tab, f5, win+d
+- program: caminho completo de um executável, pasta, URL ou protocolo como spotify:
+- script: caminho completo de um arquivo .bat, .cmd, .ps1 ou executável
+
+SEGURANÇA
+Use somente na sua própria rede USB e mantenha o token privado. O servidor executa ações que você mesmo configurar, incluindo scripts. Não encaminhe a porta para a internet.
+
+NOTAS
+- Controles de mídia funcionam quando o programa de música aceita as teclas multimídia do Windows.
+- “Controlar jogos” significa enviar atalhos de teclado configurados; não injeta código no jogo nem contorna anti-cheat.
+- Os botões e o protocolo já estão no projeto, mas a comunicação real deve ser testada no seu tablet/PC. Android 4.2.2 é antigo e alguns SDKs atuais podem exigir ajustes de build.
+
+
+PERSONALIZAR IMAGENS E GIFS NOS BOTÕES
+------------------------------------
+No tablet, mantenha pressionado qualquer botão do painel. Escolha “Escolher imagem / GIF” para abrir a galeria/gerenciador de arquivos e selecione uma imagem PNG/JPG ou um GIF animado. O arquivo é copiado para o armazenamento privado do app, então não depende de manter o arquivo original no mesmo lugar. Para voltar ao botão sem imagem, mantenha pressionado e escolha “Remover imagem do botão”.
+
+As imagens e GIFs são personalizados diretamente no tablet nesta versão. O aplicativo Windows continua configurando as ações que cada botão executa; ele não transfere imagens automaticamente para o tablet.
+
+
+GERAR O APK SEM INSTALAR NADA (GitHub Actions)
+1. Crie um repositório no GitHub e envie TODO o conteúdo desta pasta (inclusive .github/).
+2. Aba "Actions" > "Build APK" > "Run workflow".
+3. Ao terminar (~3 min), baixe "ULTRON-StreamDeck-apk" em Artifacts. Dentro está o app-debug.apk (minSdk 17 = Android 4.2.2).
